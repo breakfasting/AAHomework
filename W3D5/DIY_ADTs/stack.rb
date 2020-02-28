@@ -14,7 +14,6 @@ class Stack
     # removes one element from the stack
     unless @stack.empty?
       @stack.pop
-      return true
     else
       return false
     end

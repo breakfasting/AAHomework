@@ -15,8 +15,10 @@ class GraphNode
 
 end
 
+require 'set'
+
 def bfs(start, target)
-  visited = []
+  visited = Set.new
   queue = Queue.new
   queue.enq(start)
   until queue.empty?

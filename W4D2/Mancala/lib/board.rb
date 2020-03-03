@@ -1,11 +1,11 @@
 class Board
-  attr_accessor :cups, :curr_player
+  attr_accessor :cups
 
   def initialize(name1, name2)
     @cups = place_stones
     @player1 = name1
     @player2 = name2
-    @curr_player = @player1
+    @curr_player = ''
   end
 
   def place_stones
@@ -32,28 +32,30 @@ class Board
     count = cups[start_pos].length
     cups[start_pos].delete(:stone)
     pos = start_pos
-    curr_player = current_player_name
+    @curr_player = current_player_name
+    # p curr_player
     while count > 0
       pos += 1
-      unless (curr_player == @player1) ? pos == 13 : pos == 6
+      unless (@curr_player == @player1) ? pos == 13 : pos == 6
         cups[pos % 14] << :stone
         count -= 1
       end
     end
     render
-    
-    if cups[pos % 14].length > 1
-      return pos % 14
-    else
-      next_turn(pos % 14)
-    end
+    next_turn(pos % 14)
   end
 
   def next_turn(ending_cup_idx)
     # helper method to determine whether #make_move returns :switch, :prompt, or ending_cup_idx
     # p ending_cup_idx
-    return :prompt if (curr_player == @player1) ? ending_cup_idx == 13 : ending_cup_idx == 6
+    # p @curr_player
+    if ((@curr_player == @player1) ? ending_cup_idx == 6 : ending_cup_idx == 13)
+      # p "prompt"
+      return :prompt
+    end
     return :switch if cups[ending_cup_idx].length == 1
+
+    return ending_cup_idx if cups[ending_cup_idx].length > 1
     
   end
 

@@ -1,7 +1,7 @@
-FISH_ARR = ['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish', 'ffiiiiisshh', 'fsh', 'fiiiissshhhhhh']
+FISH_ARR = ["fish", "fiiish", "fiiiiish", "fiiiish", "fffish", "ffiiiiisshh", "fsh", "fiiiissshhhhhh"]
 
 def sluggish_octopus
-  longest_fish = ''
+  longest_fish = ""
   FISH_ARR.each do |first_fish|
     FISH_ARR.each do |second_fish|
       if second_fish.length > first_fish.length
@@ -26,7 +26,7 @@ class Array
 
     left = self[0...mid].merge_sort(&prc)
     right = self[mid..-1].merge_sort(&prc)
-    
+
     Array.merge(left, right, &prc)
   end
 
@@ -48,7 +48,7 @@ end
 p dominant_octopus
 
 def clever_octopus
-  longest_fish = ''
+  longest_fish = ""
   FISH_ARR.each do |fish|
     if fish.length > longest_fish.length
       longest_fish = fish
@@ -59,3 +59,25 @@ end
 
 p clever_octopus
 
+# Dancing Octopus
+tiles_array = ["up", "right-up", "right", "right-down", "down", "left-down", "left", "left-up"]
+
+def slow_dance(direction, tiles_array)
+  tiles_array.each_with_index do |ele, i|
+    return i if ele == direction
+  end
+  nil
+end
+
+p slow_dance("up", tiles_array)
+p slow_dance("right-down", tiles_array)
+
+
+new_tiles_data_structure = { "up" => 0, "right-up" => 1, "right" => 2, "right-down" => 3, "down" => 4, "left-down" => 5, "left" => 6, "left-up" => 7 }
+
+def fast_dance(dir, tiles_hash)
+  tiles_hash[dir]
+end
+
+p fast_dance("up", new_tiles_data_structure)
+p fast_dance("right-down", new_tiles_data_structure)
